@@ -159,7 +159,7 @@ rustc = "/usr/bin/rustc"
 rustfmt = "/usr/bin/rustfmt"
 locked-deps = true
 vendor = true
-tools = ["cargo", "clippy", "rustdoc", "rustfmt", "rust-demangler"]
+tools = ["cargo", "clippy", "rustdoc", "rustfmt", "rust-analyzer", "rust-demangler"]
 sanitizers = true
 profiler = true
 docs = false
@@ -229,7 +229,7 @@ rustc = "/usr/bin/rustc"
 rustfmt = "/usr/bin/rustfmt"
 locked-deps = true
 vendor = true
-tools = ["cargo", "clippy", "rustdoc", "rustfmt", "rust-demangler"]
+tools = ["cargo", "clippy", "rustdoc", "rustfmt", "rust-analyzer", "rust-demangler"]
 sanitizers = true
 profiler = true
 docs = false
@@ -1999,6 +1999,7 @@ rm -f %{buildroot}*/usr/lib/rustlib/install.log
 rm -f %{buildroot}*/usr/lib/rustlib/manifest-cargo
 rm -f %{buildroot}*/usr/lib/rustlib/manifest-clippy-preview
 rm -f %{buildroot}*/usr/lib/rustlib/manifest-rust-analysis-x86_64-unknown-linux-gnu
+rm -f %{buildroot}*/usr/lib/rustlib/manifest-rust-analyzer-preview
 rm -f %{buildroot}*/usr/lib/rustlib/manifest-rust-demangler-preview
 rm -f %{buildroot}*/usr/lib/rustlib/manifest-rust-std-x86_64-unknown-linux-gnu
 rm -f %{buildroot}*/usr/lib/rustlib/manifest-rustfmt-preview
@@ -2036,11 +2037,13 @@ rm -f %{buildroot}-v3/usr/lib/rustlib/x86_64-unknown-linux-gnu/lib/*.so
 /V3/usr/bin/cargo-fmt.old
 /V3/usr/bin/clippy-driver
 /V3/usr/bin/clippy-driver.old
+/V3/usr/bin/rust-analyzer
 /V3/usr/bin/rust-demangler
 /V3/usr/bin/rustc
 /V3/usr/bin/rustdoc
 /V3/usr/bin/rustfmt
 /V3/usr/bin/rustfmt.old
+/V3/usr/libexec/rust-analyzer-proc-macro-srv
 /usr/bin/cargo
 /usr/bin/cargo-clippy
 /usr/bin/cargo-clippy.old
@@ -2048,6 +2051,7 @@ rm -f %{buildroot}-v3/usr/lib/rustlib/x86_64-unknown-linux-gnu/lib/*.so
 /usr/bin/cargo-fmt.old
 /usr/bin/clippy-driver
 /usr/bin/clippy-driver.old
+/usr/bin/rust-analyzer
 /usr/bin/rust-demangler
 /usr/bin/rust-gdb
 /usr/bin/rust-gdbgui
@@ -2056,6 +2060,7 @@ rm -f %{buildroot}-v3/usr/lib/rustlib/x86_64-unknown-linux-gnu/lib/*.so
 /usr/bin/rustdoc
 /usr/bin/rustfmt
 /usr/bin/rustfmt.old
+/usr/libexec/rust-analyzer-proc-macro-srv
 
 %files data
 %defattr(-,root,root,-)
