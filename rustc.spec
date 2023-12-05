@@ -121,8 +121,23 @@ cd %{_builddir}/rustc-1.76.0-src
 %patch -P 3 -p1
 %patch -P 4 -p1
 %patch -P 5 -p1
+mkdir -p src/tools/.cargo
+cat > src/tools/.cargo/config.toml <<END
+[build]
+rustflags = ["-C", "target-cpu=x86-64-v2"]
+END
+cat src/tools/.cargo/config.toml >> src/tools/rust-analyzer/.cargo/config.toml
+cat src/tools/.cargo/config.toml >> src/tools/cargo/.cargo/config.toml
+sed -i '/rustflags/s/.$/, "-C", "target-cpu=x86-64-v2"]/' src/tools/clippy/.cargo/config.toml
 pushd ..
 cp -a rustc-1.76.0-src buildavx2
+cat > buildavx2/src/tools/.cargo/config.toml <<END
+[build]
+rustflags = ["-C", "target-cpu=x86-64-v3"]
+END
+cat buildavx2/src/tools/.cargo/config.toml >> buildavx2/src/tools/rust-analyzer/.cargo/config.toml
+cat buildavx2/src/tools/.cargo/config.toml >> buildavx2/src/tools/cargo/.cargo/config.toml
+sed -i '/rustflags/s/.$/, "-C", "target-cpu=x86-64-v2"]/' buildavx2/src/tools/clippy/.cargo/config.toml
 popd
 
 %build
