@@ -41,6 +41,7 @@ Patch1: 0001-Add-Makefile-wrapper.patch
 Patch2: 0002-Reduce-mixing-and-matching-sys-and-linux.patch
 Patch3: 0003-compiler-rt-fix-linux-header.patch
 Patch4: backport-mount-h.patch
+Patch5: vanilla-rustc-version.patch
 
 %description
 This is an experimental implementation of Google's SPDY protocol in C.
@@ -119,6 +120,7 @@ cd %{_builddir}/rustc-1.76.0-src
 %patch -P 2 -p1
 %patch -P 3 -p1
 %patch -P 4 -p1
+%patch -P 5 -p1
 pushd ..
 cp -a rustc-1.76.0-src buildavx2
 popd
@@ -151,7 +153,6 @@ prefix = "/usr"
 [rust]
 debuginfo-level-std = 2
 channel = "stable"
-description = "Clear Linux %{version}-%{release}"
 rpath = false
 backtrace-on-ice = true
 remap-debuginfo = false
@@ -222,7 +223,6 @@ prefix = "/usr"
 [rust]
 debuginfo-level-std = 2
 channel = "stable"
-description = "Clear Linux %{version}-%{release}"
 rpath = false
 backtrace-on-ice = true
 remap-debuginfo = false

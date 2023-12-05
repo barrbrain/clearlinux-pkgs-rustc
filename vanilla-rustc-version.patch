@@ -1,0 +1,30 @@
+--- rustc-1.76.0-src/src/bootstrap/src/lib.rs~	2024-02-04 22:18:05.000000000 +0900
++++ rustc-1.76.0-src/src/bootstrap/src/lib.rs	2024-02-22 00:19:46.185248008 +0900
+@@ -300,7 +300,7 @@
+     /// line and the filesystem `config`.
+     ///
+     /// By default all build output will be placed in the current directory.
+-    pub fn new(mut config: Config) -> Build {
++    pub fn new(config: Config) -> Build {
+         let src = config.src.clone();
+         let out = config.out.clone();
+ 
+@@ -322,7 +322,6 @@
+         let is_sudo = false;
+ 
+         let omit_git_hash = config.omit_git_hash;
+-        let rust_info = GitInfo::new(omit_git_hash, &src);
+         let cargo_info = GitInfo::new(omit_git_hash, &src.join("src/tools/cargo"));
+         let rust_analyzer_info = GitInfo::new(omit_git_hash, &src.join("src/tools/rust-analyzer"));
+         let clippy_info = GitInfo::new(omit_git_hash, &src.join("src/tools/clippy"));
+@@ -380,10 +379,6 @@
+             )
+         }
+ 
+-        if rust_info.is_from_tarball() && config.description.is_none() {
+-            config.description = Some("built from a source tarball".to_owned());
+-        }
+-
+         let mut build = Build {
+             initial_rustc: config.initial_rustc.clone(),
+             initial_cargo: config.initial_cargo.clone(),
